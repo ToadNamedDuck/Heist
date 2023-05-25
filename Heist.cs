@@ -13,7 +13,7 @@ namespace Heist
 
             //Randomized luck value.
             Random rnd = new Random();
-            int luck = rnd.Next(-10, 10);
+
 
             //Let's initialize a bank with 100 difficulty.
             Bank theBank = new Bank(100);
@@ -30,7 +30,7 @@ namespace Heist
                 Console.WriteLine("What is your team member's name?");
                 string memberName = Console.ReadLine();
                 //check if the name is empty
-                if(memberName == "")
+                if (memberName == "")
                 {
                     break;
                 }
@@ -42,7 +42,7 @@ namespace Heist
                 TeamMember newMember = new TeamMember(memberName, memberSkill, memberCourage);
                 Team.Add(newMember);
                 Console.WriteLine("Add another member? (Y/N)");
-                if(!(Console.ReadLine().ToLower() == "y"))//Also ask them if they want to continue, so they know they can type something not "y"
+                if (!(Console.ReadLine().ToLower() == "y"))//Also ask them if they want to continue, so they know they can type something not "y"
                 //to end this loop.
                 {
                     break;
@@ -67,13 +67,24 @@ namespace Heist
             Console.WriteLine($"Your team's total skill level is {totalSkill}.");
             Console.WriteLine($"The bank's difficulty level is {theBank.DifficultyLevel}.");
 
-            if(theBank.DifficultyLevel < totalSkill)
+            Console.WriteLine("How many times should we run the calculations?");
+
+            int numberOfRuns = int.Parse(Console.ReadLine());
+
+            //loop over the simulation
+            for (int i = 0; i < numberOfRuns; i++)
             {
-                Console.WriteLine("You robbed this bank successfully!");
-            }
-            else
-            {
-                Console.WriteLine("You failed to rob the bank.");
+                //generate the luck value of the bank.
+                int luck = rnd.Next(-10, 10);
+                theBank.DifficultyLevel += luck;
+                if (theBank.DifficultyLevel < totalSkill)
+                {
+                    Console.WriteLine("You robbed this bank successfully!");
+                }
+                else
+                {
+                    Console.WriteLine("You failed to rob the bank.");
+                }
             }
         }
     }
