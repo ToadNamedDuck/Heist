@@ -11,6 +11,10 @@ namespace Heist
             //Create a way to store multiple team members
             List<TeamMember> Team = new List<TeamMember>();
 
+            //Randomized luck value.
+            Random rnd = new Random();
+            int luck = rnd.Next(-10, 10);
+
             //Let's initialize a bank with 100 difficulty.
             Bank theBank = new Bank(100);
 
@@ -61,6 +65,7 @@ namespace Heist
             }
 
             Console.WriteLine($"Your team's total skill level is {totalSkill}.");
+            Console.WriteLine($"The bank's difficulty level is {theBank.DifficultyLevel}.");
 
             if(theBank.DifficultyLevel < totalSkill)
             {
