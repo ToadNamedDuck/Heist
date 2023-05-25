@@ -11,6 +11,9 @@ namespace Heist
             //Create a way to store multiple team members
             List<TeamMember> Team = new List<TeamMember>();
 
+            //Let's initialize a bank with 100 difficulty.
+            Bank theBank = new Bank(100);
+
             Console.WriteLine("Plan your Heist!");
             Console.WriteLine("________________");
             Console.WriteLine("We're going to need at least one team member to plan this heist.");
@@ -49,9 +52,23 @@ namespace Heist
             //Once that loop is finished, display a number of the members of the team, and then output each member's information.
             Console.WriteLine($"You have added {Team.Count} members to your heist team. Let's review each of them, now.");
             Console.WriteLine("_______________________________________________________________________________________");
+            //save a total of everyone's skill level;
+            int totalSkill = 0;
             foreach (TeamMember member in Team)
             {
                 Console.WriteLine(member.ToString());
+                totalSkill += member.SkillLevel;
+            }
+
+            Console.WriteLine($"Your team's total skill level is {totalSkill}.");
+
+            if(theBank.DifficultyLevel < totalSkill)
+            {
+                Console.WriteLine("You robbed this bank successfully!");
+            }
+            else
+            {
+                Console.WriteLine("You failed to rob the bank.");
             }
         }
     }
