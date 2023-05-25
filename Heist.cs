@@ -15,11 +15,12 @@ namespace Heist
             Random rnd = new Random();
 
 
-            //Let's initialize a bank with 100 difficulty.
-            Bank theBank = new Bank(100);
-
             Console.WriteLine("Plan your Heist!");
             Console.WriteLine("________________");
+            Console.WriteLine("What is the difficulty level of the bank as an integer?");
+            int bankDifficulty = int.Parse(Console.ReadLine());
+            //initialize the bank with this value
+            Bank theBank = new Bank(bankDifficulty);
             Console.WriteLine("We're going to need at least one team member to plan this heist.");
             Console.WriteLine("________________________________________________________________");
             //Initialize a team member.
@@ -71,6 +72,9 @@ namespace Heist
 
             int numberOfRuns = int.Parse(Console.ReadLine());
 
+            //store successes and failures
+            int successfulRun = 0;
+            int failedRun = 0;
             //loop over the simulation
             for (int i = 0; i < numberOfRuns; i++)
             {
@@ -79,13 +83,16 @@ namespace Heist
                 theBank.DifficultyLevel += luck;
                 if (theBank.DifficultyLevel < totalSkill)
                 {
-                    Console.WriteLine("You robbed this bank successfully!");
+                    successfulRun++;
                 }
                 else
                 {
-                    Console.WriteLine("You failed to rob the bank.");
+                    failedRun++;
                 }
             }
+            Console.WriteLine(@$"
+            You successfully raided the bank {successfulRun} times.
+            You failed {failedRun} times.");
         }
     }
 }
